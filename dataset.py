@@ -46,6 +46,7 @@ class RoadSequenceDataset(Dataset):
         sample = {'data': data, 'label': label}
         return sample
 
+# Use this for Conv-LSTM versions of the networks
 class RoadSequenceDatasetList(Dataset):
 
     def __init__(self,istrain, file_path, transforms):

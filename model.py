@@ -23,6 +23,7 @@ def generate_model(args):
         model = UNet(config.img_channel, config.class_num).to(device)
     return model
 
+## class to create UNet-ConvLSTM
 class UNet_ConvLSTM(nn.Module):
     def __init__(self, n_channels, n_classes):
         super(UNet_ConvLSTM, self).__init__()
@@ -65,7 +66,7 @@ class UNet_ConvLSTM(nn.Module):
         x = self.outc(x)
         return x#, test
 
-
+# class to create SegNet-ConvLSTM
 class SegNet_ConvLSTM(nn.Module):
     def __init__(self):
         super(SegNet_ConvLSTM,self).__init__()
@@ -195,7 +196,7 @@ class SegNet_ConvLSTM(nn.Module):
         up1 = self.upconv1_block(up2)
         return F.log_softmax(up1, dim=1)
 
-
+# class to create UNet
 class UNet(nn.Module):
     def __init__(self, n_channels, n_classes):
         super(UNet, self).__init__()
@@ -223,7 +224,7 @@ class UNet(nn.Module):
         x = self.outc(x)
         return x
 
-
+# class to create SegNet
 class SegNet(nn.Module):
     def __init__(self):
         super(SegNet,self).__init__()

@@ -93,25 +93,14 @@ if __name__ == '__main__':
     model = generate_model(args)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
-    # optimizer = torch.optim.Adam([
-    #     {'params': get_parameters(model, layer_name=["inc", "down1", "down2", "down3", "down4"]), 'lr': args.lr * 0.0},
-    #     {'params': get_parameters(model, layer_name=["outc", "up1", "up2", "up3", "up4"]), 'lr': args.lr * 0.1},
-    #     {'params': get_parameters(model, layer_name=["convlstm"]), 'lr': args.lr * 1},
-    # ], lr=args.lr)
-    # optimizer = torch.optim.SGD([
-    #     {'params': get_parameters(model, layer_name=["conv1_block", "conv2_block", "conv3_block", "conv4_block", "conv5_block"]), 'lr': args.lr * 0.5},
-    #     {'params': get_parameters(model, layer_name=["upconv5_block", "upconv4_block", "upconv3_block", "upconv2_block", "upconv1_block"]), 'lr': args.lr * 0.33},
-    #     {'params': get_parameters(model, layer_name=["Conv3D_block"]), 'lr': args.lr * 0.5},
-    # ], lr=args.lr,momentum=0.9)
-
     scheduler = lr_scheduler.StepLR(optimizer, step_size=1, gamma=0.5)
     class_weight = torch.Tensor(config.class_weight)
     criterion = torch.nn.CrossEntropyLoss(weight=class_weight).to(device)
     best_acc = 0
 
+    # if wanted to load the pretrained model uncomment the following lines
     # pretrained_dict = torch.load(config.pretrained_path)
     # model_dict = model.state_dict()
-
     # pretrained_dict_1 = {k: v for k, v in pretrained_dict.items() if (k in model_dict)}
     # model_dict.update(pretrained_dict_1)
     # model.load_state_dict(model_dict)

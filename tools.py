@@ -58,7 +58,7 @@ def splitIndex(index_fpath, split_index_path, val_rate = 0.1, test_rate=0.0, is_
                 print("test_index: %s/%s" % (i + 1 - train_num - val_num, test_num))
         test_file.close()
 
-def rebuildFileFolder(path): #清空eval文件夹
+def rebuildFileFolder(path):
     if os.path.exists(path):
         shutil.rmtree(path)
     os.mkdir(path)
